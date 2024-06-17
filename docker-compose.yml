@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  joomla:
+    build: .
+    container_name: joomla-web
+    depends_on:
+      - db
+    ports:
+      - "82:80"
+    environment:
+      JOOMLA_DB_HOST: db:3306
+      JOOMLA_DB_USER: joomla
+      JOOMLA_DB_PASSWORD: joomlapassword
+      JOOMLA_DB_NAME: joomla
+    volumes:
+      - ./src:/var/www/html
+
+  db:
+    image: mysql:latest
+    container_name: joomla-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: joomla
+      MYSQL_USER: joomla
+      MYSQL_PASSWORD: joomlapassword
+    volumes:
+      - db-data:/var/lib/mysql
+
+  sonarqube:
+    image: sonarqube:latest
+    container_name: sonarqube
+    ports:
+      - "9000:9000"
+    environment:
+      - SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true
+
+volumes:
+  db-data:
