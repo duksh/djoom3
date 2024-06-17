@@ -3,7 +3,8 @@
     "docker.certPath": "",
     "docker.tlsVerify": "0",
     "sonarlint.connectedMode.project": {
-        "connectionId": "your-connection-id",
-        "projectKey": "your-project-key"
+        "connectionId": "${env:SONARLINT_CONNECTION_ID}",
+        "projectKey": "${env:SONARLINT_PROJECT_KEY}"
     }
+    
 }

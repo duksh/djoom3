@@ -15,3 +15,9 @@
 /tmp
 /logs
 .env
+
+
+# Ignore shell configuration files
+.bashrc
+.zshrc
+.profile
