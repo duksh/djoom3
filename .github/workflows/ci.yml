@@ -73,10 +73,9 @@ jobs:
             -Dsonar.host.url=http://localhost:9000 \
             -Dsonar.login=${{ secrets.SONAR_TOKEN }}
 
-    post:
-      always:
-        - name: Check SonarQube logs
-          run: docker logs $(docker ps -q --filter ancestor=sonarqube:9.4-community)
+      - name: Check SonarQube logs
+        if: always()
+        run: docker logs $(docker ps -q --filter ancestor=sonarqube:9.4-community)
 
   docker:
     runs-on: ubuntu-latest
