@@ -44,6 +44,8 @@ jobs:
           SONAR_SCANNER_OPTS: "-Xmx6g -Xms1g"
           SONARQUBE_WEB_JAVAOPTS: "-Xmx3g -Xms1g"
           SONARQUBE_CE_JAVAOPTS: "-Xmx3g -Xms1g"
+          SONAR_ES_BOOTSTRAP_CHECKS_DISABLE: "true"  # Disable Elasticsearch bootstrap checks
+          SONAR_SEARCH_JAVAOPTS: "-Xmx2g -Xms1g"  # Set Java options for Elasticsearch
 
     steps:
       - name: Checkout repository
