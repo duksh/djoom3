@@ -32,10 +32,6 @@ jobs:
         ports:
           - 9000:9000
         options: >-
-          --health-cmd="curl -s http://localhost:9000/api/system/health | grep -q UP"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=10
           --memory=7g
         env:
           SONARQUBE_JDBC_USERNAME: sonar
@@ -76,7 +72,7 @@ jobs:
       - name: Check SonarQube logs
         if: always()
         run: |
-          CONTAINER_ID=$(docker ps -q --filter ancestor=sonarqube:9.4-community)
+          CONTAINER_ID=$(docker ps -a -q --filter ancestor=sonarqube:9.4-community)
           if [ -n "$CONTAINER_ID" ]; then
             docker logs $CONTAINER_ID
           else
