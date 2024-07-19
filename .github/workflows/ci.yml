@@ -36,12 +36,14 @@ jobs:
           --health-interval=10s
           --health-timeout=5s
           --health-retries=10
-          --memory=4g
+          --memory=8g
         env:
           SONARQUBE_JDBC_USERNAME: sonar
           SONARQUBE_JDBC_PASSWORD: sonar
           SONARQUBE_JDBC_URL: jdbc:h2:tcp://localhost:9092/sonar
-          SONAR_SCANNER_OPTS: "-Xmx2g -Xms512m"
+          SONAR_SCANNER_OPTS: "-Xmx4g -Xms1g"
+          SONARQUBE_WEB_JAVAOPTS: "-Xmx2g -Xms1g"
+          SONARQUBE_CE_JAVAOPTS: "-Xmx2g -Xms1g"
 
     steps:
       - name: Checkout repository
