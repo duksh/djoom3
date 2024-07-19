@@ -65,9 +65,6 @@ jobs:
             sleep 10
           done
 
-      - name: Check SonarQube logs
-        run: docker logs $(docker ps -q --filter ancestor=sonarqube:9.4-community)
-
       - name: Run SonarQube Scanner
         run: |
           sonar-scanner \
@@ -75,6 +72,11 @@ jobs:
             -Dsonar.sources=. \
             -Dsonar.host.url=http://localhost:9000 \
             -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+
+    post:
+      always:
+        - name: Check SonarQube logs
+          run: docker logs $(docker ps -q --filter ancestor=sonarqube:9.4-community)
 
   docker:
     runs-on: ubuntu-latest
