@@ -75,7 +75,13 @@ jobs:
 
       - name: Check SonarQube logs
         if: always()
-        run: docker logs $(docker ps -q --filter ancestor=sonarqube:9.4-community)
+        run: |
+          CONTAINER_ID=$(docker ps -q --filter ancestor=sonarqube:9.4-community)
+          if [ -n "$CONTAINER_ID" ]; then
+            docker logs $CONTAINER_ID
+          else
+            echo "SonarQube container failed to start."
+          fi
 
   docker:
     runs-on: ubuntu-latest
