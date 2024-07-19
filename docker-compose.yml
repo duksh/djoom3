@@ -11,14 +11,13 @@ services:
     environment:
       JOOMLA_DB_HOST: db:3306
       JOOMLA_DB_USER: joomla
-      JOOMLA_DB_PASSWORD: joomlapassword
+      JOOMLA_DB_PASSWORD: ${JOOMLA_DB_PASSWORD}
       JOOMLA_DB_NAME: joomla
     volumes:
       - ./src:/var/www/html
-
   db:
     image: mysql:latest
-    container_name: joomla-mysql
+    container_name: joomla-mysqjoomlapasswordl
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_DATABASE: joomla
