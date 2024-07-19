@@ -39,7 +39,7 @@ jobs:
 
       - name: Run SonarQube Scanner
         run: |
-          sonar-scanner \
+          /opt/sonar-scanner/bin/sonar-scanner \
             -Dsonar.projectKey=your_project_key \
             -Dsonar.sources=. \
             -Dsonar.host.url=http://localhost:9000 \
