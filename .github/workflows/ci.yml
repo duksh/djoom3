@@ -36,6 +36,7 @@ jobs:
           --health-interval=10s
           --health-timeout=5s
           --health-retries=10
+          --memory=2g
 
     steps:
       - name: Checkout repository
@@ -54,6 +55,9 @@ jobs:
           until curl -s http://localhost:9000/api/system/health | grep -q UP; do
             sleep 10
           done
+
+      - name: Check SonarQube logs
+        run: docker logs $(docker ps -q --filter ancestor=sonarqube:latest)
 
       - name: Run SonarQube Scanner
         run: |
@@ -89,7 +93,7 @@ jobs:
 
     strategy:
       matrix:
-        php-version: [7.4, 8.0]
+        php-version: [7.4, 8.0, 8.1]
         mysql-version: [5.7, 8.0]
 
     steps:
